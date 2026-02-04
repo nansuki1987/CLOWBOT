@@ -65,7 +65,7 @@ Search and enable these permissions:
 Create a `.env` file or set environment variables:
 
 ```bash
-export FEISHU_APP_ID="cli_a9f590bd7a78dcc9"
+export FEISHU_APP_ID="cli_xxxxxxxxxxxxxxxx"
 export FEISHU_APP_SECRET="your_app_secret_here"
 export FEISHU_VERIFICATION_TOKEN="your_verification_token"
 export FEISHU_ENCRYPT_KEY="your_encrypt_key"
