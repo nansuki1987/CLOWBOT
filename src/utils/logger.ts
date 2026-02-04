@@ -6,7 +6,7 @@ import winston from 'winston';
 export const createLogger = (module: string) => {
   return winston.createLogger({
     format: winston.format.combine(
-      winston.format.timestamp({ format: 'HH:mm:ss' }),
+      winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
       winston.format.printf(({ level, message, timestamp, ...meta }) => {
         const metaStr = Object.keys(meta).length ? JSON.stringify(meta) : '';
         return `${timestamp} ${level} ${module} ${metaStr ? metaStr + ' ' : ''}${message}`;

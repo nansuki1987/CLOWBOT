@@ -21,7 +21,7 @@ export class FeishuMonitor {
    * Processes incoming Feishu message event
    */
   async handleMessageEvent(event: FeishuMessageEvent): Promise<void> {
-    logger.info('Received Feishu message event', { module: 'feishu-monitor' });
+    logger.info('Received Feishu message event');
     
     try {
       const result = await messageHandler.sendMessage({

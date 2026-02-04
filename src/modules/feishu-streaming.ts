@@ -4,13 +4,26 @@ import { isPermissionError, parsePermissionError } from '../types/feishu';
 const logger = createLogger('feishu-streaming');
 
 /**
+ * Configuration options for FeishuStreamingManager
+ */
+export interface StreamingManagerConfig {
+  cooldownMs?: number;
+}
+
+/**
  * Manages streaming session state and permission checking
  */
 export class FeishuStreamingManager {
   private hasCardWritePermission: boolean | null = null;
   private permissionCheckFailed = false;
   private lastPermissionCheckTime: number = 0;
-  private readonly PERMISSION_CHECK_COOLDOWN = 60000; // 1 minute cooldown
+  private readonly permissionCheckCooldown: number;
+
+  constructor(config: StreamingManagerConfig = {}) {
+    // Default to 60 seconds, can be overridden via config or environment variable
+    this.permissionCheckCooldown = config.cooldownMs 
+      ?? parseInt(process.env.FEISHU_PERMISSION_CHECK_COOLDOWN_MS || '60000', 10);
+  }
 
   /**
    * Attempts to start a streaming session
@@ -22,8 +35,8 @@ export class FeishuStreamingManager {
     if (this.hasCardWritePermission === false) {
       const timeSinceLastCheck = Date.now() - this.lastPermissionCheckTime;
       
-      if (timeSinceLastCheck < this.PERMISSION_CHECK_COOLDOWN) {
-        logger.debug(`Skipping streaming card creation - missing required permission (cardkit:card:write). Cooldown active for ${Math.ceil((this.PERMISSION_CHECK_COOLDOWN - timeSinceLastCheck) / 1000)}s`);
+      if (timeSinceLastCheck < this.permissionCheckCooldown) {
+        logger.debug(`Skipping streaming card creation - missing required permission (cardkit:card:write). Cooldown active for ${Math.ceil((this.permissionCheckCooldown - timeSinceLastCheck) / 1000)}s`);
         return null;
       }
     }
