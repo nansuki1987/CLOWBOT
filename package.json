@@ -5,9 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "jest",
     "lint": "eslint src --ext .ts",
-    "start": "node dist/index.js"
+    "start": "node dist/example.js"
   },
   "keywords": ["feishu", "lark", "bot", "streaming"],
   "author": "nansuki1987",
