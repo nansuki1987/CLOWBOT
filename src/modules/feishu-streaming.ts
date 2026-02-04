@@ -152,7 +152,7 @@ export class FeishuStreamingManager {
   /**
    * Simulate streaming card creation (placeholder for actual API call)
    */
-  private async createStreamingCard(options: StreamingCardOptions): Promise<string> {
+  private async createStreamingCard(_options: StreamingCardOptions): Promise<string> {
     // This is a placeholder - in real implementation, this would call Feishu API
     // For now, simulate a permission error to demonstrate error handling
     throw new StreamingPermissionError(
@@ -165,7 +165,7 @@ export class FeishuStreamingManager {
   /**
    * Update a streaming session
    */
-  async updateSession(sessionId: string, content: string): Promise<void> {
+  async updateSession(sessionId: string, _content: string): Promise<void> {
     const session = this.sessions.get(sessionId);
     
     if (!session) {
